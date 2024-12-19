@@ -1,0 +1,2 @@
+gebruikersnaam = '<gebruikersnaam>'
+wachtwoord = '<wachtwoord>'
