@@ -1,2 +1,0 @@
-gebruikersnaam = '<gebruikersnaam>'
-wachtwoord = '<wachtwoord>'

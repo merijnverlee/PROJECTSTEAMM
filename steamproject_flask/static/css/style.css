@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #c7d5e0;
+    margin: 0;
+    padding: 0;
+}
+
+.top-bar {
+    background-color: #1b2838; /* Donkerblauwe header */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar h1 {
+    margin: 0;
+}
+
+.top-bar p {
+    margin: 0;
+    font-size: 20px;
+}
+
+.container {
+    display: grid;
+    grid-template-areas:
+        "raspberry friends-online"
+        "steam-reviews steam-reviews"
+        "statistics statistics"
+        "game-profiles game-profiles";
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+/* Algemene styling voor alle vakjes */
+.card {
+    background-color: #2a475e; /* Blauw passend bij de layout */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Specifieke gebieden */
+.raspberry-pi {
+    grid-area: raspberry;
+}
+
+.friends-online {
+    grid-area: friends-online;
+}
+
+.steam-reviews {
+    grid-area: steam-reviews;
+    text-align: center;
+}
+
+.statistics {
+    grid-area: statistics;
+}
+
+.game-profiles {
+    grid-area: game-profiles;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+/* Status-indicatoren voor vrienden */
+.status {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.status .icon {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.status.online .icon {
+    background-color: green;
+}
+
+.status.offline .icon {
+    background-color: red;
+}
+
+.status.inactive .icon {
+    background-color: orange;
+}
+
+.status.online {
+    color: green;
+}
+
+.status.offline {
+    color: red;
+}
+
+.status.inactive {
+    color: orange;
+}
+
+/* Links styling */
+a {
+    color: #1b75e0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+

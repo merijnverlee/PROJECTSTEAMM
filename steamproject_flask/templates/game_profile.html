@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ game.name }} - Game details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <h1>Game details</h1>
+    </div>
+
+    <div class="container">
+        <div class="game-info">
+            <h2>{{ game.name }}</h2>
+            <p><strong>AppID:</strong> {{ game.appid }}</p>
+            <p><strong>Release Datum:</strong> {{ game.release_date }}</p>
+            <p><strong>Engels:</strong> {{ game.english }}</p>
+            <p><strong>Ontwikkelaar:</strong> {{ game.developer }}</p>
+            <p><strong>Uitgever:</strong> {{ game.publisher }}</p>
+            <p><strong>Platforms:</strong> {{ game.platforms }}</p>
+            <p><strong>Leeftijdsbeperking:</strong> {{ game.required_age }}</p>
+            <p><strong>Categorieën:</strong> {{ game.categories | join(', ') }}</p>
+            <p><strong>Genres:</strong> {{ game.genres | join(', ') }}</p>
+            <p><strong>Steamspy Tags:</strong> {{ game.steamspy_tags | join(', ') }}</p>
+            <p><strong>Achievements:</strong> {{ game.achievements }}</p>
+            <p><strong>Positieve Beoordelingen:</strong> {{ game.positive_ratings }}</p>
+            <p><strong>Negatieve Beoordelingen:</strong> {{ game.negative_ratings }}</p>
+            <p><strong>Gemiddelde Speeltijd:</strong> {{ game.average_playtime }} minuten</p>
+            <p><strong>Mediaan Speeltijd:</strong> {{ game.median_playtime }} minuten</p>
+            <p><strong>Eigenaren:</strong> {{ game.owners }}</p>
+            <p><strong>Prijs:</strong> {{ game.price }}</p>
+        </div>
+        <a href="{{ url_for('home') }}">Terug naar Home</a>
+    </div>
+</body>
+</html>
+
+

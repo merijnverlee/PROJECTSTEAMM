@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Steam - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        .top-bar {
+            background-color: #2a3b47;
+            color: #ffffff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            display: grid;
+            grid-template-areas:
+                "game-profiles raspberry-pi"
+                "statistics steam-reviews"
+                "statistics friends-online";
+            grid-gap: 20px;
+            padding: 20px;
+        }
+
+        .game-profiles {
+            grid-area: game-profiles;
+        }
+
+        .raspberry-pi {
+            grid-area: raspberry-pi;
+        }
+
+        .steam-reviews {
+            grid-area: steam-reviews;
+            text-align: center;
+        }
+
+        .friends-online {
+            grid-area: friends-online;
+        }
+
+        .statistics {
+            grid-area: statistics;
+        }
+
+        .box {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #2a3b47;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+        }
+
+        .status span {
+            margin-left: 5px;
+        }
+
+        .status.online {
+            color: green;
+        }
+
+        .status.online span {
+            color: green;
+        }
+
+        .status.offline {
+            color: red;
+        }
+
+        .status.offline span {
+            color: red;
+        }
+
+        .status.inactive {
+            color: orange;
+        }
+
+        .status.inactive span {
+            color: orange;
+        }
+
+        .icon {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .icon.online {
+            background-color: green;
+        }
+
+        .icon.offline {
+            background-color: red;
+        }
+
+        .icon.inactive {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>𝔖𝔱𝔢𝔞𝔪 ℑ𝔫𝔰𝔦𝔤𝔥𝔱©</h1>
+        <p>{{ current_date }}</p>
+    </div>
+
+    <div class="container">
+        <!-- Game Profiles Section -->
+        <div class="box game-profiles">
+            <h2>Game profiles</h2>
+            <form action="{{ url_for('search_game') }}" method="post">
+                <input type="text" name="appid" placeholder="Typ een Game ID" required>
+                <button type="submit">Zoek</button>
+            </form>
+            <ul>
+                {% for game in games %}
+                <li>
+                    {{ loop.index }}.
+                    <a href="{{ url_for('game_profile', appid=game.appid) }}">{{ game.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Raspberry PI Section -->
+        <div class="box raspberry-pi">
+            <h2>Raspberry PI</h2>
+            <p>Hier kun je informatie over de Raspberry PI laten zien.</p>
+        </div>
+
+        <!-- Steam Best Reviews Section -->
+        <div class="box steam-reviews">
+            <h2>Steam beste reviews</h2>
+            <ul>
+                {% for game in top_10_games %}
+                <li>
+                    {{ loop.index }}. {{ game.name }} ({{ game.positive_ratings }} positieve beoordelingen)
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Online Vrienden Section -->
+        <div class="box friends-online">
+            <h2>Online vrienden</h2>
+            <ul>
+                <li class="status online">
+                    <span class="icon online"></span> King of Death <span>(Online)</span>
+                </li>
+                <li class="status online">
+                    <span class="icon online"></span> BeastXSteam <span>(Online)</span>
+                </li>
+                <li class="status offline">
+                    <span class="icon offline"></span> King Slayer <span>(Offline)</span>
+                </li>
+                <li class="status offline">
+                    <span class="icon offline"></span> Killerbee <span>(Offline)</span>
+                </li>
+                <li class="status inactive">
+                    <span class="icon inactive"></span> The Honored One <span>(Inactief)</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Statistics Section -->
+<div class="box statistics">
+    <h2>Statistieken</h2>
+    <img src="{{ url_for('static', filename='gemiddelde_speeltijd_per_game.png') }}" alt="Gemiddelde speeltijd per game" style="max-width: 100%; height: auto;">
+    <img src="{{ url_for('static', filename='mediaan_prijs_per_genre.png') }}" alt="Mediaanprijs per genre" style="max-width: 100%; height: auto;">
+</div>
