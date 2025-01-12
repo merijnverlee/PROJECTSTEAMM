@@ -6,7 +6,7 @@ from datetime import datetime
 from pydantic_core.core_schema import none_schema
 from statistieken import gemiddelde_speeltijd_weergeven
 from statistieken import mediaan_prijs_per_genre_weergeven
-
+from flask import request, jsonify
 
 # Flask-app configureren
 app = Flask(__name__)
@@ -44,7 +44,7 @@ def home():
     current_date = datetime.now().strftime('%A, %d %B %Y')
     online_friends = ["King of Death", "King Slayer", "BeastsXSteam", "The Honored One", "Killerbee"]
     top_10_games = get_top_10_games_by_positive_reviews()
-    return render_template('home.html', games=games, current_date=current_date, top_10_games=top_10_games)
+    return render_template('home.html', games=games, current_date=current_date, top_10_games=top_10_games, sensor_status=sensor_status)
 
 
 def get_game_data_from_db(appid):
@@ -142,5 +142,22 @@ def generate_chart():
     mediaan_prijs_per_genre_weergeven()
     return "Grafieken gegenereerd"
 
+sensor_status = {"status": "safe", "distance": None}
+
+@app.route('/update_distance', methods=['POST'])
+def update_distance():
+    global sensor_status
+    data = request.get_json()
+    if data:
+        sensor_status = data
+        return jsonify({"message": "Status bijgewerkt"}), 200
+    return jsonify({"error": "Ongeldige gegevens"}), 400
+
+@app.route('/get_distance_status', methods=['GET'])
+def get_distance_status():
+    return jsonify(sensor_status)
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
+

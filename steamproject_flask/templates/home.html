@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="30">
     <title>Project Steam - Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
@@ -162,9 +163,17 @@
 
         <!-- Raspberry PI Section -->
         <div class="box raspberry-pi">
-            <h2>Raspberry PI</h2>
-            <p>Hier kun je informatie over de Raspberry PI laten zien.</p>
+            <h2>Raspberry Pi</h2>
+            {% if sensor_status['status'] == 'safe' %}
+            <p>Wees bewust van je gezondheid en game niet te lang :)</p>
+            {% elif sensor_status['status'] == 'too_close' %}
+            <p>Je bent te dichtbij het scherm neem afstand :(</p>
+            {% else %}
+            <p>Geen gegevens beschikbaar.</p>
+            {% endif %}
+            <p>Afstand: {% if sensor_status['distance'] %}{{ sensor_status['distance'] }} cm{% else %}Niet beschikbaar{% endif %}</p>
         </div>
+
 
         <!-- Steam Best Reviews Section -->
         <div class="box steam-reviews">

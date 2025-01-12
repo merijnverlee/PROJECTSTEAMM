@@ -111,7 +111,7 @@ def mediaan_prijs_per_genre_weergeven():
     plt.xlabel("Mediaanprijs (€)")
     plt.ylabel("Genres")
     plt.title("Mediaanprijs per genre")
-    plt.xlim(0, 10)  # x-as
+    plt.xlim(0, 9)  # x-as
     plt.gca().invert_yaxis()
     plt.tight_layout()
 
